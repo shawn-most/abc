@@ -75,6 +75,7 @@ do
     # Check if key was used in the last 3 months
     if (( last_used_date_unix < three_months_ago ))
     then
+      echo $user " " $key
       echo "Key $key of user $user has not been used for 3 months. Deactivating..."
       aws iam update-access-key --user-name $user --access-key-id $key --status Inactive
     fi
