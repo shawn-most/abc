@@ -63,7 +63,8 @@ do
     # If last used date is empty, assume the key as not used
     if [ "$last_used_date" == "null" ]
     then
-      echo $user " " $key
+      echo $user
+      echo $key
       echo "Key $key of user $user has never been used. Deactivating..."
       aws iam update-access-key --user-name $user --access-key-id $key --status Inactive
       continue
