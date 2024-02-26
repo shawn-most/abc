@@ -24,7 +24,7 @@ for user_info in $(echo "${users_json}" | jq -c '.Users[]'); do
             login_profile=$(aws iam get-login-profile --user-name "$user_name" 2>/dev/null)
 
             if [ -n "$login_profile" ]; then
-                echo "Login profile found for user: $user_name. Deleting..."
+                #echo "Login profile found for user: $user_name. Deleting..."
                 # Delete the login profile for the user
                 aws iam delete-login-profile --user-name "$user_name"
                 echo "Login profile deleted for user: $user_name"
@@ -63,6 +63,7 @@ do
     # If last used date is empty, assume the key as not used
     if [ "$last_used_date" == "null" ]
     then
+      echo -e "$a\t$b"
       echo $user
       echo $key
       #echo "Key $key of user $user has never been used. Deactivating..."
