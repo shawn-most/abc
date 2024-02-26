@@ -63,9 +63,9 @@ do
     # If last used date is empty, assume the key as not used
     if [ "$last_used_date" == "null" ]
     then
-      echo -e "$a\t$b"
-      echo $user
-      echo $key
+      echo -e "$user\t$key"
+      #echo $user
+      #echo $key
       #echo "Key $key of user $user has never been used. Deactivating..."
       aws iam update-access-key --user-name $user --access-key-id $key --status Inactive
       continue
@@ -77,8 +77,9 @@ do
     # Check if key was used in the last 3 months
     if (( last_used_date_unix < three_months_ago ))
     then
-      echo $user
-      echo $key
+      echo -e "$user\t$key"
+      #echo $user
+      #echo $key
       #echo "Key $key of user $user has not been used for 3 months. Deactivating..."
       aws iam update-access-key --user-name $user --access-key-id $key --status Inactive
     fi
